@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hatgundi.userportal.exception.domain.UserNotFoundException;
 import com.hatgundi.userportal.service.UserService;
 
 /**
@@ -35,7 +36,7 @@ public class UserController {
 	}
 
 	@GetMapping("/")
-	public ResponseEntity<String> getUser(String userId) {
+	public ResponseEntity<String> getUser(String userId) throws UserNotFoundException {
 		String user = userService.getUser(userId);
 		return new ResponseEntity<String>(user, HttpStatus.OK);
 	}
@@ -47,7 +48,7 @@ public class UserController {
 	}
 
 	@PutMapping
-	public ResponseEntity<String> updateUser(String userId, Object obj) {
+	public ResponseEntity<String> updateUser(String userId, Object obj) throws UserNotFoundException {
 		String updateUser = userService.updateUser(userId, obj);
 		return new ResponseEntity<String>(updateUser, HttpStatus.OK);
 	}

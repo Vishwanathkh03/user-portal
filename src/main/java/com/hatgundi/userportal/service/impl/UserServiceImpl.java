@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hatgundi.userportal.exception.domain.UserNotFoundException;
 import com.hatgundi.userportal.repository.UserRepository;
 import com.hatgundi.userportal.service.UserService;
 
@@ -28,8 +29,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getUser(String userId) {
-		return userRepo.getUser(userId);
+	public String getUser(String userId) throws UserNotFoundException  {
+		String user = userRepo.getUser(userId);
+		return user;
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String updateUser(String userId, Object obj) {
+	public String updateUser(String userId, Object obj) throws UserNotFoundException {
 		userRepo.getUser(userId);// get the stored(db) object and update values from obj.
 		userRepo.addUser(obj); // Only one method for save and update in JPA Repo
 		return "Put: user updated";

@@ -5,6 +5,8 @@ package com.hatgundi.userportal.repository;
 
 import org.springframework.stereotype.Repository;
 
+import com.hatgundi.userportal.exception.domain.UserNotFoundException;
+
 /**
  * @author vhatgund
  *
@@ -16,7 +18,10 @@ public class UserRepository {
 		return "Get: all Users";
 	}
 
-	public String getUser(String userId) {
+	public String getUser(String userId) throws UserNotFoundException {
+		if (userId == null) {
+			throw new UserNotFoundException("User doesn't exist..!");
+		}
 		return "Get: user by userID:" + userId;
 	}
 

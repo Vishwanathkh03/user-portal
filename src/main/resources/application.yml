@@ -1,1 +1,5 @@
-
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: false
+  resources:
+    add-mappings: false
